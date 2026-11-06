@@ -1,0 +1,14 @@
+{
+  "name": "grass",
+  "displayName": "Touch Grass",
+  "version": "1.0.0",
+  "description": "Answer once. Walk away. Claude asks everything upfront, works alone, proves it's done, and reports in icons instead of essays.",
+  "author": {
+    "name": "takumicommits",
+    "url": "https://github.com/takumicommits"
+  },
+  "homepage": "https://github.com/takumicommits/touch-grass",
+  "repository": "https://github.com/takumicommits/touch-grass",
+  "license": "MIT",
+  "keywords": ["workflow", "productivity", "output-style", "hooks", "focus", "verification"]
+}

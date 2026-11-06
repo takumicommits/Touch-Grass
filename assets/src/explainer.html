@@ -1,0 +1,135 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+
+<style>
+@font-face { font-family: "PS2P"; src: url("fonts/PressStart2P.ttf"); }
+@font-face { font-family: "Plex"; font-weight: 400; src: url("fonts/plex/package/files/ibm-plex-sans-latin-400-normal.woff2"); }
+@font-face { font-family: "Plex"; font-weight: 600; src: url("fonts/plex/package/files/ibm-plex-sans-latin-600-normal.woff2"); }
+@font-face { font-family: "Plex"; font-weight: 700; src: url("fonts/plex/package/files/ibm-plex-sans-latin-700-normal.woff2"); }
+:root {
+  --sky: #e6f3ff; --sky2: #cfe8ff; --ink: #1e203c; --muted: #4c5a72; --grass: #4caa42; --grass-d: #348636;
+  --paper: #fffdf4; --line: #1e203c; --blue: #3052dc; --sun: #ffd43c; --dim: #8a94a6;
+  --emoji: "Noto Color Emoji";
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #fff; font-family: "Plex", var(--emoji), sans-serif; color: var(--ink); }
+.frame { width: 1280px; padding: 44px 48px 48px; background: linear-gradient(180deg, var(--sky) 0%, #f4faff 100%);
+  border: 4px solid var(--line); border-radius: 18px; }
+.kicker { font-family: "PS2P"; font-size: 14px; letter-spacing: 1px; color: var(--grass-d); }
+h1 { font-family: "PS2P"; font-size: 26px; line-height: 1.4; margin: 12px 0 30px; color: var(--ink); }
+.row { display: grid; grid-template-columns: 1fr 64px 1fr 64px 1fr; align-items: stretch; }
+.arrow { display: grid; place-items: center; font-family: "PS2P"; font-size: 22px; color: var(--blue); }
+.card { background: #fff; border: 4px solid var(--line); border-radius: 12px; box-shadow: 6px 6px 0 var(--line);
+  display: flex; flex-direction: column; overflow: hidden; }
+.card .top { padding: 18px 20px 0; }
+.step { font-family: "PS2P"; font-size: 13px; color: var(--blue); }
+.title { font-family: "PS2P"; font-size: 17px; margin-top: 10px; line-height: 1.35; }
+.visual { margin: 16px 20px 0; height: 200px; border-radius: 8px; border: 3px solid var(--line); overflow: hidden;
+  display: grid; place-items: center; background: var(--sky2); }
+.visual img { width: 100%; height: 100%; object-fit: cover; image-rendering: pixelated; }
+.cap { padding: 16px 20px 20px; font-size: 18px; line-height: 1.45; color: var(--muted); }
+.cap b { color: var(--ink); font-weight: 600; }
+/* step 1: question with buttons */
+.ask { width: 100%; height: 100%; background: #f7f9fc; padding: 18px; display: flex; flex-direction: column; justify-content: center; gap: 12px; }
+.ask .q { font-size: 17px; font-weight: 600; line-height: 1.35; }
+.ask .btns { display: flex; flex-direction: column; gap: 8px; }
+.btn { border: 3px solid var(--line); border-radius: 8px; padding: 8px 12px; font-size: 16px; font-weight: 600; background: #fff; }
+.btn.rec { background: var(--ink); color: #fff; }
+.btn small { font-weight: 400; opacity: .75; }
+/* step 3: receipt */
+.receipt { width: 100%; height: 100%; background: var(--paper); padding: 16px 18px; font-size: 17px; line-height: 1.75; }
+.receipt ol { list-style: none; }
+.receipt li { white-space: nowrap; }
+.receipt .n { color: var(--dim); font-weight: 600; margin-right: 6px; }
+img.e { width: 1.1em; height: 1.1em; vertical-align: -0.18em; margin-right: 6px; }
+.legend { margin-top: 34px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.legend .lab { font-family: "PS2P"; font-size: 12px; margin-right: 6px; color: var(--ink); }
+.chip { background: #fff; border: 3px solid var(--line); border-radius: 999px; padding: 6px 14px; font-size: 17px; font-weight: 600; }
+.chip span { font-weight: 400; color: var(--muted); }
+/* before / after */
+.vs { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; }
+.side .tag { font-family: "PS2P"; font-size: 14px; margin-bottom: 14px; }
+.side.bad .tag { color: #a24b4b; }
+.side.good .tag { color: var(--grass-d); }
+.bubble { background: #fff; border: 4px solid var(--line); border-radius: 12px; box-shadow: 6px 6px 0 var(--line); padding: 22px 24px; height: 330px; overflow: hidden; position: relative; }
+.bad .bubble { color: #6b7280; font-size: 16.5px; line-height: 1.55; }
+.bad .bubble p + p { margin-top: 10px; }
+.bad .bubble::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 90px; background: linear-gradient(transparent, #fff); }
+.good .bubble { font-size: 19px; line-height: 1.8; }
+.good .bubble ol { list-style: none; }
+.good .bubble .n { color: var(--dim); font-weight: 600; margin-right: 8px; }
+.notes { margin-top: 18px; display: flex; gap: 10px; flex-wrap: wrap; }
+.note { border: 3px solid var(--line); border-radius: 8px; padding: 6px 12px; font-size: 16px; font-weight: 600; background: #fff; }
+.bad .note { background: #fff1f1; }
+.good .note { background: #eefbea; }
+</style></head>
+<body>
+
+<div class="frame" id="how">
+  <div class="kicker">HOW IT WORKS</div>
+  <h1>Answer once. Walk away.<br>Come back to proof.</h1>
+  <div class="row">
+    <div class="card">
+      <div class="top"><div class="step">STEP 1</div><div class="title">Answer once</div></div>
+      <div class="visual"><div class="ask">
+        <div class="q">Dark mode on every screen, or just settings?</div>
+        <div class="btns"><div class="btn rec">Every screen <small>(Recommended)</small></div><div class="btn">Just settings</div></div>
+      </div></div>
+      <div class="cap">Claude thinks the whole task through and asks <b>everything upfront</b>. Usually 0–2 clicks.</div>
+    </div>
+    <div class="arrow">▶</div>
+    <div class="card">
+      <div class="top"><div class="step">STEP 2</div><div class="title">Walk away</div></div>
+      <div class="visual"><img src="crop_desk.png" alt="" style="object-position: center 55%"></div>
+      <div class="cap">It works <b>alone</b>. A build check blocks fake "done", and a fresh-eyes reviewer tries to break it.</div>
+    </div>
+    <div class="arrow">▶</div>
+    <div class="card">
+      <div class="top"><div class="step">STEP 3</div><div class="title">Come back to proof</div></div>
+      <div class="visual"><div class="receipt"><ol>
+        <li><span class="n">1.</span><img class="e" src="fonts/tw/package/2705.svg" alt=""> Dark mode on all screens</li>
+        <li><span class="n">2.</span><img class="e" src="fonts/tw/package/1f440.svg" alt=""> Chart colors guessed</li>
+        <li><span class="n">3.</span><img class="e" src="fonts/tw/package/1f449.svg" alt=""> Ship it?</li>
+        <li><img class="e" src="fonts/tw/package/1f9fe.svg" alt=""> settings-dark.png</li>
+      </ol></div></div>
+      <div class="cap">A <b>5-second summary</b> with a screenshot. Type <b>/grass:why 2</b> for the reasoning.</div>
+    </div>
+  </div>
+  <div class="legend">
+    <span class="lab">EVERY ICON = AN ACTION</span>
+    <span class="chip"><img class="e" src="fonts/tw/package/1f449.svg" alt=""> <span>decide</span></span><span class="chip"><img class="e" src="fonts/tw/package/1f440.svg" alt=""> <span>glance</span></span>
+    <span class="chip"><img class="e" src="fonts/tw/package/274c.svg" alt=""> <span>read</span></span><span class="chip"><img class="e" src="fonts/tw/package/1f9fe.svg" alt=""> <span>look</span></span>
+    <span class="chip"><img class="e" src="fonts/tw/package/2705.svg" alt=""> <span>skip</span></span><span class="chip"><img class="e" src="fonts/tw/package/2139.svg" alt=""> <span>skip</span></span>
+  </div>
+</div>
+
+<div style="height:40px"></div>
+
+<div class="frame" id="vs">
+  <div class="kicker">SAME TASK, TWO REPLIES</div>
+  <h1>Stop reading essays.<br>Start glancing.</h1>
+  <div class="vs">
+    <div class="side bad">
+      <div class="tag">WITHOUT</div>
+      <div class="bubble">
+        <p>Great question! I've gone ahead and made several changes to implement dark mode across the application. First, I updated the theme configuration to include a new dark palette, carefully choosing colors that maintain accessibility contrast ratios. Then I refactored the settings view so that the toggle persists the user's preference…</p>
+        <p>Next, I noticed the chart component used hard-coded colors, so I adjusted those as well, although you may want to review them. I also considered adding an automatic mode that follows the system setting, but I wasn't sure whether you'd want that, so let me know!</p>
+        <p>This should work now. Would you like me to also…</p>
+      </div>
+      <div class="notes"><span class="note">Wall of text</span><span class="note">Questions buried mid-paragraph</span><span class="note">"Should work now"</span></div>
+    </div>
+    <div class="side good">
+      <div class="tag">WITH TOUCH GRASS</div>
+      <div class="bubble"><ol>
+        <li><span class="n">1.</span><img class="e" src="fonts/tw/package/2705.svg" alt=""> Dark mode on all 6 screens, setting remembered</li>
+        <li><span class="n">2.</span><img class="e" src="fonts/tw/package/1f440.svg" alt=""> Chart colors guessed (no brand palette found)</li>
+        <li><span class="n">3.</span><img class="e" src="fonts/tw/package/23ed.svg" alt=""> Auto mode skipped (not asked for)</li>
+        <li><span class="n">4.</span><img class="e" src="fonts/tw/package/1f449.svg" alt=""> Ship it?</li>
+        <li><img class="e" src="fonts/tw/package/1f9fe.svg" alt=""> settings-dark.png · build check passed</li>
+      </ol></div>
+      <div class="notes"><span class="note">Read in 5 seconds</span><span class="note">Questions asked before work starts</span><span class="note">Proof attached</span></div>
+    </div>
+  </div>
+</div>
+
+</body></html>

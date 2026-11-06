@@ -1,0 +1,15 @@
+{
+  "name": "touch-grass",
+  "description": "Touch Grass: answer once, walk away, come back to proof.",
+  "owner": {
+    "name": "takumicommits",
+    "url": "https://github.com/takumicommits"
+  },
+  "plugins": [
+    {
+      "name": "grass",
+      "source": "./",
+      "description": "Answer once. Walk away. Claude asks everything upfront, works alone, proves it's done, and reports in icons instead of essays."
+    }
+  ]
+}
